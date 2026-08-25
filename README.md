@@ -29,7 +29,7 @@ Add your custom `dlmusic` configuration to your shell startup configuration to h
 ```bash
 alias dlmusic='cd /[MUSIC_DIRECTORY_PATH]/Music && yt-dlp --cookies-from-browser firefox --download-archive downloaded_songs.txt -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --embed-metadata --parse-metadata "playlist_index:%(track_number)s" --parse-metadata "playlist_count:%(track_total)s" --parse-metadata "artist:%(album_artist)s" --parse-metadata "artist:%(performer)s" --replace-in-metadata "comment" ".*" "" --replace-in-metadata "description" ".*" "" -o "%(artist)s/%(album)s/%(playlist_index)s - %(title)s.%(ext)s"'
 ```
-**You should change "/[MUSIC_DIRECTORY_PATH]/Music" to your own directory
+**You should change "/[MUSIC_DIRECTORY_PATH]/Music" to your own directory**
 
 ## Tutorial
 
