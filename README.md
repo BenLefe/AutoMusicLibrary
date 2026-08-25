@@ -1,5 +1,14 @@
 # Apple Music / CSV to Local Library Pipeline
 
+⚠️ **DISCLAIMER / WORK IN PROGRESS**
+I am not a professional developer and I can make mistakes. This repository is a Work In Progress (WIP) and will be continuously updated and improved over time. 
+
+**CRITICAL WARNINGS BEFORE USING:**
+* **Column Names:** The parsing scripts rely heavily on the exact layout of your exported CSV. If your CSV columns differ (e.g., if Title isn't Column 1 or Artist isn't Column 2), the scripts may parse your files incorrectly or fail. Double-check your column structures before running!
+* **Filenames & Folders:** Be **extremely careful** with the file names and file paths used inside these scripts. If your destination path paths are wrong or if files are named inconsistently, you risk mislabeling files or failing to skip tracks correctly. Always back up your music folder before testing scripts! Use at your own risk.
+
+---
+
 A semi-automated pipeline built for Arch Linux to convert streaming playlists into a cleanly organized local offline music library using `yt-dlp` and `music-tag`.
 
 ## Prerequisites
