@@ -1,0 +1,2 @@
+#in ~/.bashrc
+alias dlmusic='cd /mnt/c68ff51e-f39b-4a73-b0c7-ad8c9f8a593e/Music && yt-dlp --cookies-from-browser firefox --download-archive downloaded_songs.txt -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --embed-metadata --parse-metadata "playlist_index:%(track_number)s" --parse-metadata "playlist_count:%(track_total)s" --parse-metadata "artist:%(album_artist)s" --parse-metadata "artist:%(performer)s" --replace-in-metadata "comment" ".*" "" --replace-in-metadata "description" ".*" "" -o "%(artist)s/%(album)s/%(playlist_index)s - %(title)s.%(ext)s"'
