@@ -4,9 +4,19 @@ import music_tag
 
 MUSIC_DIR = "/mnt/c68ff51e-f39b-4a73-b0c7-ad8c9f8a593e/Music"
 
+# Anything in here will be caught whether it uses (), [], or has spaces.
 YOUTUBE_GARBAGE = [
-    r'\(Official Music Video\)', r'\(Official Video\)', r'\(Music Video\)', 
-    r'\(Official Audio\)', r'\[Official Video\]', r'\(Lyric Video\)', r'\(Lyrics\)'
+    r'\(official music video\)', r'\[official music video\]',
+    r'\(official video\)',       r'\[official video\]',
+    r'\(music video\)',          r'\[music video\]',
+    r'\(official audio\)',       r'\[official audio\]',
+    r'\(lyric video\)',          r'\[lyric video\]',
+    r'\(lyrics\)',               r'\[lyrics\]',
+    r'\blyrics\b',               r'\(hd\)', r'\[hd\]',
+    r'\(hq\)',                   r'\[hq\]',
+    r'\(official\)',             r'\[official\]',
+    r'\(audio\)',                r'\[audio\]',
+    r'\(video\)',                r'\[video\]'
 ]
 
 def format_fallback_artist(folder_name):
@@ -37,6 +47,10 @@ for root, dirs, files in os.walk(MUSIC_DIR):
             # 2. Strip out raw YouTube clutter right away
             for pattern in YOUTUBE_GARBAGE:
                 filename = re.sub(pattern, '', filename, flags=re.IGNORECASE).strip()
+
+            # 2.2. Clean up loose/hanging dashes or spaces left over from stripping junk
+            filename = re.sub(r'\s+-\s*$', '', filename)  # strip trailing dash
+            filename = re.sub(r'\s+', ' ', filename).strip() # normalize messy double spaces
             
             # 3. Extract Track Number if it exists (e.g., "01 - ...")
             track_num = None
