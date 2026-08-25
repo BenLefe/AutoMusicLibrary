@@ -27,8 +27,9 @@ A semi-automated pipeline built for Arch Linux to convert streaming playlists in
 ### Required `.bashrc` / `.zshrc` Alias
 Add your custom `dlmusic` configuration to your shell startup configuration to handle proper media parsing and layout generation:
 ```bash
-alias dlmusic='cd /path/to/your/Music && yt-dlp --cookies-from-browser firefox --download-archive downloaded_songs.txt -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --embed-metadata --parse-metadata "playlist_index:%(track_number)s" --parse-metadata "playlist_count:%(track_total)s" --parse-metadata "artist:%(album_artist)s" --parse-metadata "artist:%(performer)s" --replace-in-metadata "comment" ".*" "" --replace-in-metadata "description" ".*" "" -o "%(artist)s/%(album)s/%(playlist_index)s - %(title)s.%(ext)s"'
+alias dlmusic='cd /[MUSIC_DIRECTORY_PATH]/Music && yt-dlp --cookies-from-browser firefox --download-archive downloaded_songs.txt -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --embed-metadata --parse-metadata "playlist_index:%(track_number)s" --parse-metadata "playlist_count:%(track_total)s" --parse-metadata "artist:%(album_artist)s" --parse-metadata "artist:%(performer)s" --replace-in-metadata "comment" ".*" "" --replace-in-metadata "description" ".*" "" -o "%(artist)s/%(album)s/%(playlist_index)s - %(title)s.%(ext)s"'
 ```
+**You should change "/[MUSIC_DIRECTORY_PATH]/Music" to your own directory
 
 ## Tutorial
 
@@ -38,16 +39,15 @@ Export your playlists or favorite music from Apple Music into a raw `.csv` data 
 ### Step 2: Convert CSV to Search Queries
 Run the native Bash converter script. This automatically removes absolute duplicates from the CSV, strips loose quotes, and structures names cleanly into a text query list:
 ```bash
-chmod +x convert_playlist.sh
-./convert_playlist.sh
+python3 track_csv_to_txt_converter.py
 ```
 This generates a local `tracks.txt` file.
 
 ### Step 3: Run the Safe Download Loop
 Execute the automated downloader loop. The script automatically scans your existing local music folders to build an instant blocklist—skipping songs you already have in milliseconds while executing new downloads with an 8-second human delay to bypass YouTube bot walls:
 ```bash
-chmod +x process_playlist.sh
-./process_playlist.sh
+chmod +x process_playlist2.sh
+./process_playlist2.sh
 ```
 
 ### Step 4: Cleanup Metadata & YouTube Garbage
@@ -58,3 +58,15 @@ python meta_fixer.py
 
 ### Step 5: Final File Alignment
 Open the directory inside **foobar2000**, select the tracks, right-click $\rightarrow$ **File Operations** $\rightarrow$ **Rename to...**, and apply the file naming pattern `%artist%/%album%/$num(%tracknumber%,2) - %title%` to perfectly synchronize your physical file manager layout with your clean embedded tags.
+
+### Step 6: If you are using **foobar2000**
+Using **foobar2000** you can clean the small persisting errors in your metadata
+Then you can tell it to order everything according to your storage method
+  - Right click on **"All Music", File Operations, Move to...**
+  - Set everything up according to your taste and Run
+
+### Step 7 : Clean your folder directory
+After **foobar2000** moves every song to it's rightfull directory, you'll be left with a handfull of empty directories, open your terminal and clean using the following command :
+``` bash
+find /[MUSIC_DIRECTORY_PATH]/Music -depth -type d -empty -delete
+```

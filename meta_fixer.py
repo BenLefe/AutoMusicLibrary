@@ -2,7 +2,7 @@ import os
 import re
 import music_tag
 
-MUSIC_DIR = "/mnt/c68ff51e-f39b-4a73-b0c7-ad8c9f8a593e/Music"
+MUSIC_DIR = "/[MUSIC_DIRECTORY_PATH]/Music"
 
 # Anything in here will be caught whether it uses (), [], or has spaces.
 YOUTUBE_GARBAGE = [
