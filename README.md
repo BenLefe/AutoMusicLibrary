@@ -23,6 +23,11 @@ A semi-automated pipeline built for Arch Linux to convert streaming playlists in
   1. Open Firefox and navigate to `about:config`.
   2. Search for `storage.sqlite.exclusiveLock.enabled`.
   3. Toggle it to `false`.
+* Install the official Android development tools via `pacman`, this will be used to synchronize your local library directory and device library directory:
+
+```bash
+sudo pacman -S android-tools
+```
 
 ### Required `.bashrc` / `.zshrc` Alias
 Add your custom `dlmusic` configuration to your shell startup configuration to handle proper media parsing and layout generation:
@@ -70,3 +75,36 @@ After **foobar2000** moves every song to it's rightfull directory, you'll be lef
 ``` bash
 find /[MUSIC_DIRECTORY_PATH]/Music -depth -type d -empty -delete
 ```
+
+### Step 8 : Music Sync Utility
+An intelligent, low-overhead sync pipeline built to mirror a local music collection to a Huawei P20 Lite (EMUI) from an Arch Linux host machine. 
+
+Standard Android MTP file systems frequently drop connections or experience virtual locking errors with modern Linux file managers. This tool bypasses MTP entirely by leveraging **ADB (Android Debug Bridge)**, acting as an incremental mirror that copies new tracks and **automatically prunes orphaned files** from the device if they are deleted from your PC.
+
+* **Make sure you modify correctly the sync_music.sh script with the correct directory paths**
+
+#### Initial One-Time Phone Setup
+
+To establish an authenticated USB communication pathway with the Android kernel:
+
+1. Go to **Settings > System > About Phone**.
+2. Tap **Build Number** 7 times rapidly until the display reads *"You are now a developer!"*.
+3. Go back to the **System** menu, tap **Developer Options**, and toggle **USB Debugging** -> **ON**.
+4. Scroll down and ensure **Allow ADB debugging in charge only mode** is enabled *(Essential on EMUI to stop the background loop from going to sleep)*.
+5. Plug the device into your PC with a high-quality USB data cable.
+6. Unlock your screen and check the box **"Always allow from this computer"** on the pop-up warning, then tap **OK**.
+
+#### Usage Profile
+
+1. **Verify Native Connection Status**
+   ```bash
+   adb devices
+   ```
+   *Confirmed Status Example:* `9WV4C18920001231   device`
+
+2. **Execute Mirror Script**
+   Make the script executable on your machine and run it. The workflow will systematically scan, delete missing files, and stream new music over the wire:
+   ```bash
+   chmod +x sync_music.sh
+   ./sync_music.sh
+   ```
