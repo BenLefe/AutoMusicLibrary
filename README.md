@@ -51,8 +51,8 @@ This generates a local `tracks.txt` file.
 ### Step 3: Run the Safe Download Loop
 Execute the automated downloader loop. The script automatically scans your existing local music folders to build an instant blocklist—skipping songs you already have in milliseconds while executing new downloads with an 8-second human delay to bypass YouTube bot walls:
 ```bash
-chmod +x process_playlist2.sh
-./process_playlist2.sh
+chmod +x process_playlist.sh
+./process_playlist.sh
 ```
 
 ### Step 4: Cleanup Metadata & YouTube Garbage
