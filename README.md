@@ -108,3 +108,35 @@ To establish an authenticated USB communication pathway with the Android kernel:
    chmod +x sync_music.sh
    ./sync_music.sh
    ```
+---
+# 🗺️ Project Roadmap: Music Downloader CLI & GUI Evolution
+
+A strategic guide mapping out the development milestones to transform standalone automation scripts into a unified, cross-platform media application.
+
+---
+
+## 🟩 Phase 0: Baseline & Guardrails [Current Status]
+- [x] Consolidate existing scripts into a safe initial backup commit.
+- [x] Tag the legacy codebase as `v0.1.0`.
+
+## 🐍 Phase 1: Pure Python Unification (`v0.2.0`)
+- [ ] Eliminate all intermediate Bash/Shell scripts.
+- [ ] Migrate system-level file movements and folder structure generation to Python's `pathlib` and `shutil`.
+- [ ] Transition `yt-dlp` execution from an external terminal subprocess shell call to native module execution (`import yt_dlp`).
+
+## 📦 Phase 2: Modern CLI Packaging (`v1.0.0`)
+- [ ] Structurally separate the tool's core processing logic from the command-line display layers.
+- [ ] Implement a standardized modern Python package metadata schema using `pyproject.toml`.
+- [ ] Build out a polished terminal user interface wrapper using an input parsing library like `argparse` or `click`.
+- [ ] Deploy the application as a globally installable tool via local pip environments (`pip install -e .`).
+
+## 🔍 Phase 3: The Search-to-Download Engine (`v1.5.0`)
+- [ ] Integrate a background scraping or query interface (using `yt-dlp`'s search capabilities or official search wrappers).
+- [ ] Implement user input prompts enabling text-based queries (e.g., `Artist - Title`) instead of requiring direct URLs.
+- [ ] Create a terminal selection array showing the top 3–5 matching search results (Title, Channel, Duration) for verification before triggering downloads.
+- [ ] Embed automated audio post-processing pipelines to auto-inject clean ID3 audio metadata (Title, Album, Cover Art) directly into downloaded file headers.
+
+## 🖥️ Phase 4: Graphical User Interface (GUI) Evolution (`v2.0.0`)
+- [ ] Design a clean, minimal graphic front-end layout using an approachable toolkit like **CustomTkinter** or **Flet**.
+- [ ] Map visual window text components directly to the Phase 3 backend search engine data matrix.
+- [ ] Introduce a fluid graphic progress bar updating asynchronously during active downloads.
